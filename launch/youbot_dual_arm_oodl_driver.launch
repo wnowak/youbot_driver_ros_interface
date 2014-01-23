@@ -24,12 +24,13 @@ or enable the USE_SETCAP flag in the cmake file and recompile again.
 	<param name="youBotBaseName" type="str" value="youbot-base"/>
 	<param name="youBotArmName1" type="str" value="youbot-manipulator"/>
 	<param name="youBotArmName2" type="str" value="youbot-manipulator2"/>
-	
 
-	<!-- Start the driver. NOTE: Every joint topic is mapped to armName/joint_states -->
-	<node name="youbot_oodl_driver" pkg="youbot_oodl" type="youbot_oodl" output="screen">
+	<!-- youbot driver -->
+	<node pkg="youbot_driver_ros_interface"  type="youbot_driver_ros_interface" name="youbot_driver" output="screen">
+		<remap from="base/joint_states" to="joint_states"/> 
+		<remap from="arm_1/joint_states" to="joint_states"/> 
+		<remap from="arm_2/joint_states" to="joint_states"/>
 	</node>
-		
 
 	<!-- upoad URDF model to the parameter server -->  
 	<param name="robot_description" command="$(find xacro)/xacro.py '$(find youbot_description)/robots/youbot_dual_arm.urdf.xacro'"/>
