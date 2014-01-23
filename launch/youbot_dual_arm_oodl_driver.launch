@@ -36,16 +36,6 @@ or enable the USE_SETCAP flag in the cmake file and recompile again.
 
 	<!-- start robot_state_publisher -->
 	<node pkg="robot_state_publisher" type="state_publisher" name="robot_base_state_publisher" output="screen">
-		  <remap from="joint_states" to="base/joint_states"/> 
-	</node>
 
-	<node pkg="robot_state_publisher" type="state_publisher" name="robot_arm_1_state_publisher" output="screen">
-		<remap from="joint_states" to="arm_1/joint_states"/> 
-	</node>
-
-	<node pkg="robot_state_publisher" type="state_publisher" name="robot_arm_2_state_publisher" output="screen">
-		<remap from="joint_states" to="arm_2/joint_states"/> 
-	</node>
-		  
 </launch>
 
