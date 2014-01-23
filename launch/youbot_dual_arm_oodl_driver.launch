@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-
 This launch file starts the ROS wrapper for the KUKA youBot API.
-
 
 If you receive an error message that contains "Excecute as root"
 then go to the bin folder and execute: sudo setcap cap_net_raw+ep
@@ -33,10 +31,10 @@ or enable the USE_SETCAP flag in the cmake file and recompile again.
 	</node>
 		
 
-	<!-- Load appropriate URDF model for dual arm system. -->  
+	<!-- upoad URDF model to the parameter server -->  
 	<param name="robot_description" command="$(find xacro)/xacro.py '$(find youbot_description)/robots/youbot_dual_arm.urdf.xacro'"/>
 
-	<!-- Start TF publishers -->		  
+	<!-- start robot_state_publisher -->
 	<node pkg="robot_state_publisher" type="state_publisher" name="robot_base_state_publisher" output="screen">
 		  <remap from="joint_states" to="base/joint_states"/> 
 	</node>

@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-
 This launch file starts the ROS wrapper for the KUKA youBot API.
-
 
 If you receive an error message that contains "Excecute as root"
 then go to the bin folder and execute: sudo setcap cap_net_raw+ep
@@ -26,12 +24,10 @@ or enable the USE_SETCAP flag in the cmake file and recompile again.
 	<param name="youBotBaseName" type="str" value="youbot-base"/>
 	<param name="youBotArmName1" type="str" value="youbot-manipulator"/>
 	
-
-	<!-- Start the driver. NOTE: Every joint topic is mapped to armName/joint_states -->
-	<node name="youbot_driver" pkg="youbot_driver_ros_interface" type="youbot_driver_ros_interface" output="screen">
-			<remap from="base/joint_states" to="joint_states"/> 
-			<remap from="arm_1/joint_states" to="joint_states" /> 
-			<!--<remap from="arm_2/joint_states" to="joint_states" />-->
+	<!-- youbot driver -->
+	<node pkg="youbot_driver_ros_interface" type="youbot_driver_ros_interface" name="youbot_driver" output="screen">
+		<remap from="base/joint_states" to="joint_states"/> 
+		<remap from="arm_1/joint_states" to="joint_states"/> 
 	</node>
 
 	<!-- upoad URDF model to the parameter server -->  
@@ -40,6 +36,5 @@ or enable the USE_SETCAP flag in the cmake file and recompile again.
 	<!-- start robot_state_publisher -->
 	<node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen"/>
   
-		  
 </launch>
 
