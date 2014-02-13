@@ -699,6 +699,7 @@ void YouBotOODLWrapper::computeOODLSensorReadings()
     currentTime = ros::Time::now();
     youbot::JointSensedAngle currentAngle;
     youbot::JointSensedVelocity currentVelocity;
+    youbot::JointSensedCurrent currentCurrent;
 
     youbot::EthercatMaster::getInstance().AutomaticReceiveOn(false); // ensure that all joint values will be received at the same time
 
@@ -764,16 +765,19 @@ void YouBotOODLWrapper::computeOODLSensorReadings()
         baseJointStateMessage.name.resize(youBotNumberOfWheels * 2); // *2 because of virtual wheel joints in the URDF description
         baseJointStateMessage.position.resize(youBotNumberOfWheels * 2);
         baseJointStateMessage.velocity.resize(youBotNumberOfWheels * 2);
+        baseJointStateMessage.effort.resize(youBotNumberOfWheels * 2);
 
         ROS_ASSERT((youBotConfiguration.baseConfiguration.wheelNames.size() == static_cast<unsigned int> (youBotNumberOfWheels)));
         for (int i = 0; i < youBotNumberOfWheels; ++i)
         {
             youBotConfiguration.baseConfiguration.youBotBase->getBaseJoint(i + 1).getData(currentAngle); //youBot joints start with 1 not with 0 -> i + 1
             youBotConfiguration.baseConfiguration.youBotBase->getBaseJoint(i + 1).getData(currentVelocity);
+            youBotConfiguration.baseConfiguration.youBotBase->getBaseJoint(i + 1).getData(currentCurrent);
 
             baseJointStateMessage.name[i] = youBotConfiguration.baseConfiguration.wheelNames[i];
             baseJointStateMessage.position[i] = currentAngle.angle.value();
             baseJointStateMessage.velocity[i] = currentVelocity.angularVelocity.value();
+            baseJointStateMessage.effort[i] = currentCurrent.current.value();
         }
 
         /*
