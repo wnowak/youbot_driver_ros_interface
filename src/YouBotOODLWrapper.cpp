@@ -136,6 +136,8 @@ void YouBotOODLWrapper::initializeArm(std::string armName, bool enableStandardGr
         youBotConfiguration.youBotArmConfigurations[armIndex].parentFrameIDName = "base_link";
         youBotConfiguration.armNameToArmIndexMapping.insert(make_pair(armName, static_cast<int> (youBotConfiguration.youBotArmConfigurations.size())));
 
+		youBotArmDoF = youBotConfiguration.youBotArmConfigurations[armIndex].youBotArm->getNumberJoints(); 
+
         /* take joint names form configuration files */
         youBotConfiguration.youBotArmConfigurations[armIndex].jointNames.clear();
         for (int i = 0; i < youBotArmDoF; ++i)

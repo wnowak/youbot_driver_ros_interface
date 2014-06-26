@@ -213,13 +213,13 @@ private:
     
 
     /// Degrees of freedom for the youBot manipulator
-    static const int youBotArmDoF = 5;
+    int youBotArmDoF;
 
     /// Number of finger mounted on the gripper.
-    static const int youBotNumberOfFingers = 2;
+    int youBotNumberOfFingers;
 
     /// Number of wheels attached to the base.
-    static const int youBotNumberOfWheels = 4;
+    int youBotNumberOfWheels;
 
 
     std::string youBotChildFrameID;
