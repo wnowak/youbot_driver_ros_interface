@@ -62,6 +62,10 @@ node(n)
     youBotChildFrameID = "base_link"; //holds true for both: base and arm
     armJointStateMessages.clear();
 
+	youBotArmDoF = 5;
+	youBotNumberOfFingers = 2;
+	youBotNumberOfWheels = 4;
+
     n.param("youBotDriverCycleFrequencyInHz", youBotDriverCycleFrequencyInHz, 50.0);
     //n.param("trajectoryActionServerEnable", trajectoryActionServerEnable, false);
     //n.param("trajectoryVelocityGain", trajectoryVelocityGain, 0.0);
